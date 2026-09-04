@@ -1,0 +1,10 @@
+export const dynamic = "force-dynamic";
+import { redirect } from "next/navigation";
+import { getSessionUser } from "@/lib/auth";
+import HomeClient from "./HomeClient";
+
+export default async function HomePage() {
+  const user = await getSessionUser();
+  if (!user) redirect("/login");
+  return <HomeClient user={user} />;
+}
